@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="tr-TR">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="localhost_DASHBOARDORNEK1_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="localhost" />
+          <Parameter Name="database" Value="DASHBOARDORNEK1" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="MATCH_SCORES">
+        <Tables>
+          <Table Name="MATCH_SCORES" X="30" Y="30" Width="125" Height="276" />
+        </Tables>
+        <Columns>
+          <Column Table="MATCH_SCORES" Name="COUNTRY" />
+          <Column Table="MATCH_SCORES" Name="LEAGUENAME" />
+          <Column Table="MATCH_SCORES" Name="HOMETEAM" />
+          <Column Table="MATCH_SCORES" Name="AWAYTEAM" />
+          <Column Table="MATCH_SCORES" Name="MATCHID" />
+          <Column Table="MATCH_SCORES" Name="SEASON" />
+          <Column Table="MATCH_SCORES" Name="STAGE" />
+          <Column Table="MATCH_SCORES" Name="DATE" />
+          <Column Table="MATCH_SCORES" Name="HOME_TEAM_GOAL" />
+          <Column Table="MATCH_SCORES" Name="AWAY_TEAM_GOAL" />
+          <Column Table="MATCH_SCORES" Name="RESULT" />
+          <Column Table="MATCH_SCORES" Name="POINT" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="MATCH_SCORES">
+            <Field Name="COUNTRY" Type="String" />
+            <Field Name="LEAGUENAME" Type="String" />
+            <Field Name="HOMETEAM" Type="String" />
+            <Field Name="AWAYTEAM" Type="String" />
+            <Field Name="MATCHID" Type="Int32" />
+            <Field Name="SEASON" Type="String" />
+            <Field Name="STAGE" Type="Int32" />
+            <Field Name="DATE" Type="String" />
+            <Field Name="HOME_TEAM_GOAL" Type="Int32" />
+            <Field Name="AWAY_TEAM_GOAL" Type="Int32" />
+            <Field Name="RESULT" Type="Int32" />
+            <Field Name="POINT" Type="Int32" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <ScatterChart ComponentName="scatterChartDashboardItem1" Name="Scatter Chart 1" DataSource="dashboardSqlDataSource1" DataMember="MATCH_SCORES">
+      <DataItems>
+        <Measure DataMember="HOME_TEAM_GOAL" Name="Atılan Gol" DefaultId="DataItem0" />
+        <Measure DataMember="AWAY_TEAM_GOAL" Name="Yenilen Gol" DefaultId="DataItem1" />
+        <Measure DataMember="POINT" Name="Puan" DefaultId="DataItem2" />
+        <Dimension DataMember="HOMETEAM" Name="Takım" DefaultId="DataItem3" />
+      </DataItems>
+      <MeasureX DefaultId="DataItem0" />
+      <MeasureY DefaultId="DataItem1" />
+      <MeasureWeight DefaultId="DataItem2" />
+      <Dimensions>
+        <Dimension DefaultId="DataItem3" />
+      </Dimensions>
+    </ScatterChart>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutItem DashboardItem="scatterChartDashboardItem1" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

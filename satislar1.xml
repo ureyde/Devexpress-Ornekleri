@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="tr-TR">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1">
+      <Connection Name="localhost_TIGER_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="localhost" />
+          <Parameter Name="database" Value="TIGER" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+          <Parameter Name="userid" Value="" />
+          <Parameter Name="password" Value="" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="VWSALES">
+        <Tables>
+          <Table Name="WH_SALES" X="30" Y="30" Width="125" Height="456" />
+        </Tables>
+        <Columns>
+          <Column Table="WH_SALES" Name="LOGICALREF" />
+          <Column Table="WH_SALES" Name="COUNT_" />
+          <Column Table="WH_SALES" Name="TARGET_" />
+          <Column Table="WH_SALES" Name="CODE" />
+          <Column Table="WH_SALES" Name="NAME" />
+          <Column Table="WH_SALES" Name="FICHENO" />
+          <Column Table="WH_SALES" Name="DATE_" />
+          <Column Table="WH_SALES" Name="AMOUNT" />
+          <Column Table="WH_SALES" Name="PRICE" />
+          <Column Table="WH_SALES" Name="LINENET" />
+          <Column Table="WH_SALES" Name="BRANCH" />
+          <Column Table="WH_SALES" Name="SALESMAN" />
+          <Column Table="WH_SALES" Name="CITY" />
+          <Column Table="WH_SALES" Name="CLIENTNAME" />
+          <Column Table="WH_SALES" Name="BRANDCODE" />
+          <Column Table="WH_SALES" Name="BRAND" />
+          <Column Table="WH_SALES" Name="CATEGORY" />
+          <Column Table="WH_SALES" Name="CATEGORYCODE" />
+          <Column Table="WH_SALES" Name="CATEGORY_CODE1" />
+          <Column Table="WH_SALES" Name="CATEGORY_NAME1" />
+          <Column Table="WH_SALES" Name="CATEGORY_CODE2" />
+          <Column Table="WH_SALES" Name="CATEGORY_NAME2" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="VWSALES">
+            <Field Name="LOGICALREF" Type="Int32" />
+            <Field Name="COUNT_" Type="Int32" />
+            <Field Name="TARGET_" Type="Int32" />
+            <Field Name="CODE" Type="String" />
+            <Field Name="NAME" Type="String" />
+            <Field Name="FICHENO" Type="String" />
+            <Field Name="DATE_" Type="DateTime" />
+            <Field Name="AMOUNT" Type="Double" />
+            <Field Name="PRICE" Type="Double" />
+            <Field Name="LINENET" Type="Double" />
+            <Field Name="BRANCH" Type="String" />
+            <Field Name="SALESMAN" Type="String" />
+            <Field Name="CITY" Type="String" />
+            <Field Name="CLIENTNAME" Type="String" />
+            <Field Name="BRANDCODE" Type="String" />
+            <Field Name="BRAND" Type="String" />
+            <Field Name="CATEGORY" Type="String" />
+            <Field Name="CATEGORYCODE" Type="String" />
+            <Field Name="CATEGORY_CODE1" Type="String" />
+            <Field Name="CATEGORY_NAME1" Type="String" />
+            <Field Name="CATEGORY_CODE2" Type="String" />
+            <Field Name="CATEGORY_NAME2" Type="String" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="dashboardSqlDataSource1" DataMember="VWSALES">
+      <DataItems>
+        <Dimension DataMember="CITY" DefaultId="DataItem0" />
+        <Measure DataMember="LINENET" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn>
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn>
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+    <Pie ComponentName="pieDashboardItem1" Name="Pies 1" DataSource="dashboardSqlDataSource1" DataMember="VWSALES" ShowPieCaptions="false">
+      <DataItems>
+        <Dimension DataMember="CATEGORY_NAME1" DefaultId="DataItem0" />
+        <Measure DataMember="LINENET" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value DefaultId="DataItem1" />
+      </Values>
+    </Pie>
+    <Chart ComponentName="chartDashboardItem1" Name="Chart 1" DataSource="dashboardSqlDataSource1" DataMember="VWSALES">
+      <DataItems>
+        <Dimension DataMember="DATE_" DateTimeGroupInterval="MonthYear" DefaultId="DataItem0" />
+        <Measure DataMember="LINENET" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Chart 2" DataSource="dashboardSqlDataSource1" DataMember="VWSALES">
+      <DataItems>
+        <Dimension DataMember="DATE_" SortOrder="Descending" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem0" />
+        <Measure DataMember="LINENET" DefaultId="DataItem1" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="FullStackedLine">
+              <Value DefaultId="DataItem1" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Treemap ComponentName="treemapDashboardItem1" Name="Treemap 1" DataSource="dashboardSqlDataSource1" DataMember="VWSALES">
+      <DataItems>
+        <Measure DataMember="LINENET" DefaultId="DataItem0" />
+        <Dimension DataMember="CITY" DefaultId="DataItem1" />
+      </DataItems>
+      <Values>
+        <Value DefaultId="DataItem0" />
+      </Values>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+    </Treemap>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="0.5">
+        <LayoutGroup Weight="0.5">
+          <LayoutItem DashboardItem="gridDashboardItem1" Weight="0.5" />
+          <LayoutItem DashboardItem="treemapDashboardItem1" Weight="0.5" />
+        </LayoutGroup>
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="0.5" />
+      </LayoutGroup>
+      <LayoutGroup Orientation="Vertical" Weight="0.5">
+        <LayoutItem DashboardItem="pieDashboardItem1" Weight="0.5" />
+        <LayoutItem DashboardItem="chartDashboardItem2" Weight="0.5" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

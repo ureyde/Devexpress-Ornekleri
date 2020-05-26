@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="tr-TR">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="localhost_TIGER_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="localhost" />
+          <Parameter Name="database" Value="TIGER" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="VW_SATISLAR">
+        <Tables>
+          <Table Name="VW_SATISLAR" X="30" Y="30" Width="125" Height="564" />
+        </Tables>
+        <Columns>
+          <Column Table="VW_SATISLAR" Name="LOGICALREF" />
+          <Column Table="VW_SATISLAR" Name="COUNT_" />
+          <Column Table="VW_SATISLAR" Name="ITEMCODE" />
+          <Column Table="VW_SATISLAR" Name="ITEMNAME" />
+          <Column Table="VW_SATISLAR" Name="FICHENO" />
+          <Column Table="VW_SATISLAR" Name="DATE_" />
+          <Column Table="VW_SATISLAR" Name="AMOUNT" />
+          <Column Table="VW_SATISLAR" Name="PRICE" />
+          <Column Table="VW_SATISLAR" Name="LINENETTOTAL" />
+          <Column Table="VW_SATISLAR" Name="LINENET" />
+          <Column Table="VW_SATISLAR" Name="BRANCHNR" />
+          <Column Table="VW_SATISLAR" Name="BRANCH" />
+          <Column Table="VW_SATISLAR" Name="SALESMAN" />
+          <Column Table="VW_SATISLAR" Name="CITY" />
+          <Column Table="VW_SATISLAR" Name="REGION" />
+          <Column Table="VW_SATISLAR" Name="LATITUDE" />
+          <Column Table="VW_SATISLAR" Name="LONGITUDE" />
+          <Column Table="VW_SATISLAR" Name="CLIENTCODE" />
+          <Column Table="VW_SATISLAR" Name="CLIENTNAME" />
+          <Column Table="VW_SATISLAR" Name="BRANDCODE" />
+          <Column Table="VW_SATISLAR" Name="BRAND" />
+          <Column Table="VW_SATISLAR" Name="CATEGORY_NAME1" />
+          <Column Table="VW_SATISLAR" Name="CATEGORY_NAME2" />
+          <Column Table="VW_SATISLAR" Name="CATEGORY_NAME3" />
+          <Column Table="VW_SATISLAR" Name="STARTDATE" />
+          <Column Table="VW_SATISLAR" Name="ENDDATE" />
+          <Column Table="VW_SATISLAR" Name="SPECODE" />
+          <Column Table="VW_SATISLAR" Name="CAPIBLOCK_CREADEDDATE" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="VW_SATISLAR">
+            <Field Name="LOGICALREF" Type="Int32" />
+            <Field Name="COUNT_" Type="Int32" />
+            <Field Name="ITEMCODE" Type="String" />
+            <Field Name="ITEMNAME" Type="String" />
+            <Field Name="FICHENO" Type="String" />
+            <Field Name="DATE_" Type="DateTime" />
+            <Field Name="AMOUNT" Type="Double" />
+            <Field Name="PRICE" Type="Double" />
+            <Field Name="LINENETTOTAL" Type="Double" />
+            <Field Name="LINENET" Type="Double" />
+            <Field Name="BRANCHNR" Type="Int16" />
+            <Field Name="BRANCH" Type="String" />
+            <Field Name="SALESMAN" Type="String" />
+            <Field Name="CITY" Type="String" />
+            <Field Name="REGION" Type="String" />
+            <Field Name="LATITUDE" Type="Double" />
+            <Field Name="LONGITUDE" Type="Double" />
+            <Field Name="CLIENTCODE" Type="String" />
+            <Field Name="CLIENTNAME" Type="String" />
+            <Field Name="BRANDCODE" Type="String" />
+            <Field Name="BRAND" Type="String" />
+            <Field Name="CATEGORY_NAME1" Type="String" />
+            <Field Name="CATEGORY_NAME2" Type="String" />
+            <Field Name="CATEGORY_NAME3" Type="String" />
+            <Field Name="STARTDATE" Type="DateTime" />
+            <Field Name="ENDDATE" Type="DateTime" />
+            <Field Name="SPECODE" Type="String" />
+            <Field Name="CAPIBLOCK_CREADEDDATE" Type="DateTime" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Pie ComponentName="pieDashboardItem1" Name="Kasiyerlerin Yaptığı Satış Dağılımı " DataSource="dashboardSqlDataSource1" DataMember="VW_SATISLAR" ShowPieCaptions="false">
+      <DataItems>
+        <Measure DataMember="LINENET" Name="Toplam Satış" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+        <Dimension DataMember="SALESMAN" DefaultId="DataItem0" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value DefaultId="DataItem1" />
+      </Values>
+    </Pie>
+    <ComboBox ComponentName="comboBoxDashboardItem1" Name="Şehir Seçin" DataSource="dashboardSqlDataSource1" DataMember="VW_SATISLAR">
+      <DataItems>
+        <Dimension DataMember="CITY" DefaultId="DataItem0" />
+      </DataItems>
+      <FilterDimensions>
+        <Dimension DefaultId="DataItem0" />
+      </FilterDimensions>
+    </ComboBox>
+    <Chart ComponentName="chartDashboardItem1" Name="Günlere Göre Satış Dağılımı" DataSource="dashboardSqlDataSource1" DataMember="VW_SATISLAR">
+      <DataItems>
+        <Dimension DataMember="DATE_" DateTimeGroupInterval="DayMonthYear" DefaultId="DataItem1" />
+        <Measure DataMember="LINENET" DefaultId="DataItem0" />
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple SeriesType="Line">
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Chart ComponentName="chartDashboardItem2" Name="Haftanın Günlere Göre Satış Dağılımı" DataSource="dashboardSqlDataSource1" DataMember="VW_SATISLAR">
+      <DataItems>
+        <Dimension DataMember="DATE_" DateTimeGroupInterval="DayOfWeek" DefaultId="DataItem1" />
+        <Measure DataMember="LINENET" DefaultId="DataItem0">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem1" />
+      </Arguments>
+      <Panes>
+        <Pane Name="Pane 1">
+          <Series>
+            <Simple>
+              <Value DefaultId="DataItem0" />
+            </Simple>
+          </Series>
+        </Pane>
+      </Panes>
+    </Chart>
+    <Pie ComponentName="pieDashboardItem2" Name="Kategorilere Göre Satış Dağılımı" DataSource="dashboardSqlDataSource1" DataMember="VW_SATISLAR" ShowPieCaptions="false">
+      <DataItems>
+        <Dimension DataMember="CATEGORY_NAME1" DefaultId="DataItem0" />
+        <Measure DataMember="LINENET" Name="Toplam Satış" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+      </DataItems>
+      <Arguments>
+        <Argument DefaultId="DataItem0" />
+      </Arguments>
+      <Values>
+        <Value DefaultId="DataItem1" />
+      </Values>
+    </Pie>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Orientation="Vertical" Weight="100">
+      <LayoutItem DashboardItem="comboBoxDashboardItem1" Weight="11.928429423459244" />
+      <LayoutGroup Weight="38.17097415506958">
+        <LayoutItem DashboardItem="pieDashboardItem2" Weight="50" />
+        <LayoutItem DashboardItem="pieDashboardItem1" Weight="50" />
+      </LayoutGroup>
+      <LayoutGroup Weight="49.900596421471171">
+        <LayoutItem DashboardItem="chartDashboardItem1" Weight="50" />
+        <LayoutItem DashboardItem="chartDashboardItem2" Weight="50" />
+      </LayoutGroup>
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>

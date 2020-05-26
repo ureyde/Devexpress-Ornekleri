@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard CurrencyCulture="tr-TR">
+  <Title Text="Dashboard" />
+  <DataSources>
+    <SqlDataSource Name="SQL Data Source 1" ComponentName="dashboardSqlDataSource1" DataProcessingMode="Client">
+      <Connection Name="localhost_DASHBOARDORNEK1_Connection" ProviderKey="MSSqlServer">
+        <Parameters>
+          <Parameter Name="server" Value="localhost" />
+          <Parameter Name="database" Value="DASHBOARDORNEK1" />
+          <Parameter Name="useIntegratedSecurity" Value="True" />
+          <Parameter Name="read only" Value="1" />
+          <Parameter Name="generateConnectionHelper" Value="false" />
+        </Parameters>
+      </Connection>
+      <Query Type="SelectQuery" Name="COUNTRIES">
+        <Tables>
+          <Table Name="COUNTRIES" X="30" Y="30" Width="125" Height="312" />
+        </Tables>
+        <Columns>
+          <Column Table="COUNTRIES" Name="COUNTRY" />
+          <Column Table="COUNTRIES" Name="REGION" />
+          <Column Table="COUNTRIES" Name="POPULATION" />
+          <Column Table="COUNTRIES" Name="AREA" />
+          <Column Table="COUNTRIES" Name="POPDENSITY" />
+          <Column Table="COUNTRIES" Name="COASTLINE" />
+          <Column Table="COUNTRIES" Name="NETMIGRATION" />
+          <Column Table="COUNTRIES" Name="GDP" />
+          <Column Table="COUNTRIES" Name="PHONESPER1000" />
+          <Column Table="COUNTRIES" Name="BIRTHRATE" />
+          <Column Table="COUNTRIES" Name="DEATHRATE" />
+          <Column Table="COUNTRIES" Name="AGRICULTURE" />
+          <Column Table="COUNTRIES" Name="INDUSTRY" />
+          <Column Table="COUNTRIES" Name="SERVICE" />
+        </Columns>
+      </Query>
+      <ResultSchema>
+        <DataSet Name="SQL Data Source 1">
+          <View Name="COUNTRIES">
+            <Field Name="COUNTRY" Type="String" />
+            <Field Name="REGION" Type="String" />
+            <Field Name="POPULATION" Type="Double" />
+            <Field Name="AREA" Type="Double" />
+            <Field Name="POPDENSITY" Type="Double" />
+            <Field Name="COASTLINE" Type="Double" />
+            <Field Name="NETMIGRATION" Type="Double" />
+            <Field Name="GDP" Type="Double" />
+            <Field Name="PHONESPER1000" Type="Double" />
+            <Field Name="BIRTHRATE" Type="Double" />
+            <Field Name="DEATHRATE" Type="Double" />
+            <Field Name="AGRICULTURE" Type="Double" />
+            <Field Name="INDUSTRY" Type="Double" />
+            <Field Name="SERVICE" Type="Double" />
+          </View>
+        </DataSet>
+      </ResultSchema>
+      <ConnectionOptions CloseConnection="true" />
+    </SqlDataSource>
+  </DataSources>
+  <Items>
+    <Grid ComponentName="gridDashboardItem1" Name="Grid 1" DataSource="dashboardSqlDataSource1" DataMember="COUNTRIES">
+      <DataItems>
+        <Dimension DataMember="COUNTRY" DefaultId="DataItem0" />
+        <Measure DataMember="AREA" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+        <Measure DataMember="POPULATION" DefaultId="DataItem2">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+      </DataItems>
+      <GridColumns>
+        <GridDimensionColumn Name="Ülkeler">
+          <Dimension DefaultId="DataItem0" />
+        </GridDimensionColumn>
+        <GridMeasureColumn Name="Yüzölçümü">
+          <Measure DefaultId="DataItem1" />
+        </GridMeasureColumn>
+        <GridMeasureColumn Name="Nüfus">
+          <Measure DefaultId="DataItem2" />
+        </GridMeasureColumn>
+      </GridColumns>
+      <GridOptions />
+    </Grid>
+    <ChoroplethMap ComponentName="choroplethMapDashboardItem1" Name="Dünya Nüfusu" DataSource="dashboardSqlDataSource1" DataMember="COUNTRIES" ShapeTitleAttributeName="NAME" AttributeName="NAME" IncludeSummaryValueToShapeTitle="true">
+      <DataItems>
+        <Dimension DataMember="COUNTRY" DefaultId="DataItem0" />
+        <Measure DataMember="POPULATION" Name="Nüfus" DefaultId="DataItem1">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+        <Measure DataMember="AREA" Name="Yüz Ölçümü" DefaultId="DataItem2" />
+        <Measure DataMember="BIRTHRATE" Name="Doğum Oranı" DefaultId="DataItem3" />
+        <Measure DataMember="DEATHRATE" Name="Ölüm Oranı" DefaultId="DataItem4" />
+        <Measure DataMember="AREA" Name="Yüzölçümü" DefaultId="DataItem5">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+        <Measure DataMember="GDP" Name="Yıllık Milli Gelir" DefaultId="DataItem6">
+          <NumericFormat FormatType="Number" Precision="0" Unit="Ones" IncludeGroupSeparator="true" />
+        </Measure>
+        <Measure DataMember="BIRTHRATE" Name="Doğum Oranı" DefaultId="DataItem7" />
+        <Measure DataMember="DEATHRATE" Name="Ölüm Oranı" DefaultId="DataItem8" />
+      </DataItems>
+      <ViewArea TopLatitude="85.051128779806589" BottomLatitude="-58.191841333091389" CenterPointLatitude="58.818642455358741" CenterPointLongitude="13.012379358666031" CreateViewerPaddings="false" />
+      <MapLegend />
+      <WeightedLegend />
+      <TooltipMeasures>
+        <TooltipMeasure DefaultId="DataItem2" />
+        <TooltipMeasure DefaultId="DataItem3" />
+        <TooltipMeasure DefaultId="DataItem4" />
+      </TooltipMeasures>
+      <AttributeDimension DefaultId="DataItem0" />
+      <Maps>
+        <ValueMap Name="Nüfus" ValueName="Nüfus">
+          <Value DefaultId="DataItem1" />
+          <UniformScale />
+          <GradientPalette StartColor="-16776961" EndColor="-8355840" />
+        </ValueMap>
+        <ValueMap>
+          <Value DefaultId="DataItem5" />
+          <UniformScale />
+          <GradientPalette StartColor="-32768" EndColor="-16777024" />
+        </ValueMap>
+        <ValueMap>
+          <Value DefaultId="DataItem6" />
+          <UniformScale />
+          <GradientPalette StartColor="-4128832" EndColor="-32513" />
+        </ValueMap>
+        <ValueMap>
+          <Value DefaultId="DataItem7" />
+          <UniformScale />
+          <GradientPalette StartColor="-4194304" EndColor="-16744320" />
+        </ValueMap>
+        <ValueMap>
+          <Value DefaultId="DataItem8" />
+          <UniformScale />
+          <GradientPalette StartColor="-4145152" EndColor="-8388480" />
+        </ValueMap>
+      </Maps>
+    </ChoroplethMap>
+  </Items>
+  <LayoutTree>
+    <LayoutGroup Weight="100">
+      <LayoutItem DashboardItem="gridDashboardItem1" Weight="32.067510548523209" />
+      <LayoutItem DashboardItem="choroplethMapDashboardItem1" Weight="67.9324894514768" />
+    </LayoutGroup>
+  </LayoutTree>
+</Dashboard>
